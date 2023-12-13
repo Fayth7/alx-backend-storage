@@ -1,14 +1,11 @@
 -- Create a function SafeDiv
 DELIMITER //
 
+DROP FUNCTION IF EXISTS SafeDiv;
 CREATE FUNCTION SafeDiv(a INT, b INT)
-RETURNS DECIMAL(10,4)
+RETURNS FLOAT
 BEGIN
-    IF b = 0 THEN
-        RETURN 0;
-    ELSE
-        RETURN a / b;
-    END IF;
-END //
-
+    RETURN (IF (b = 0, 0, a / b));
+END
+$$
 DELIMITER ;
